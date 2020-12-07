@@ -2,7 +2,7 @@ library(magrittr)
 library(ggplot2)
 
 args = commandArgs(trailingOnly = TRUE)
-print(args)
+
 df <- read.table("./results.txt")
 
 n <- args[1] %>% as.numeric()
@@ -37,9 +37,7 @@ ggplot(data=X,aes(x=Size, y=Time, group=Algorithm, colour=Algorithm)) + geom_poi
   geom_line(size=0.75) +
   geom_errorbar(aes(ymin=Time-sds, ymax=Time+sds), width=max(sizes)/10,
                 position=position_dodge(0.05)) + 
-  theme_classic() + theme(axis.text.x = element_text(angle = 90)) + facet_wrap(X$Type) +
-  #scale_color_manual(values=c('#E69F00','#999999','blue'))
-  scale_color_manual(values=c('forestgreen', 'red', 'darkblue'))
+  theme_classic() + theme(axis.text.x = element_text(angle = 90)) + facet_wrap(X$Type)
 dev.off()
 
 pdf("bytypes.pdf", height = 2*f, width = 2.97*f)
